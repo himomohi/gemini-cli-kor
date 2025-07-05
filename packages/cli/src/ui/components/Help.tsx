@@ -23,46 +23,25 @@ export const Help: React.FC<Help> = ({ commands }) => (
   >
     {/* Basics */}
     <Text bold color={Colors.Foreground}>
-      Basics:
+      기본 사용법:
     </Text>
     <Text color={Colors.Foreground}>
-      <Text bold color={Colors.AccentPurple}>
-        Add context
-      </Text>
-      : Use{' '}
-      <Text bold color={Colors.AccentPurple}>
-        @
-      </Text>{' '}
-      to specify files for context (e.g.,{' '}
-      <Text bold color={Colors.AccentPurple}>
-        @src/myFile.ts
-      </Text>
-      ) to target specific files or folders.
+      <Text bold color={Colors.AccentPurple}>컨텍스트 추가</Text>: {' '}
+      <Text bold color={Colors.AccentPurple}>@</Text>{' '}를 사용해 특정 파일이나
+      폴더(<Text bold color={Colors.AccentPurple}>@src/myFile.ts</Text> 등)를 지정합니다.
     </Text>
     <Text color={Colors.Foreground}>
-      <Text bold color={Colors.AccentPurple}>
-        Shell mode
-      </Text>
-      : Execute shell commands via{' '}
-      <Text bold color={Colors.AccentPurple}>
-        !
-      </Text>{' '}
-      (e.g.,{' '}
-      <Text bold color={Colors.AccentPurple}>
-        !npm run start
-      </Text>
-      ) or use natural language (e.g.{' '}
-      <Text bold color={Colors.AccentPurple}>
-        start server
-      </Text>
-      ).
+      <Text bold color={Colors.AccentPurple}>셸 모드</Text>: {' '}
+      <Text bold color={Colors.AccentPurple}>!</Text>를 사용해 셸 명령을 실행하거나
+      (<Text bold color={Colors.AccentPurple}>!npm run start</Text> 등) 자연어로
+      요청할 수 있습니다(<Text bold color={Colors.AccentPurple}>start server</Text> 등).
     </Text>
 
     <Box height={1} />
 
     {/* Commands */}
     <Text bold color={Colors.Foreground}>
-      Commands:
+      명령어:
     </Text>
     {commands
       .filter((command) => command.description)
@@ -80,58 +59,40 @@ export const Help: React.FC<Help> = ({ commands }) => (
         {' '}
         !{' '}
       </Text>
-      - shell command
+      - 셸 명령
     </Text>
 
     <Box height={1} />
 
     {/* Shortcuts */}
     <Text bold color={Colors.Foreground}>
-      Keyboard Shortcuts:
+      단축키:
     </Text>
     <Text color={Colors.Foreground}>
-      <Text bold color={Colors.AccentPurple}>
-        Enter
-      </Text>{' '}
-      - Send message
+      <Text bold color={Colors.AccentPurple}>Enter</Text> - 메시지 전송
     </Text>
     <Text color={Colors.Foreground}>
       <Text bold color={Colors.AccentPurple}>
         {process.platform === 'win32' ? 'Ctrl+Enter' : 'Ctrl+J'}
       </Text>{' '}
       {process.platform === 'linux'
-        ? '- New line (Alt+Enter works for certain linux distros)'
-        : '- New line'}
+        ? '- 새 줄 (일부 리눅스 배포판에서는 Alt+Enter 사용)'
+        : '- 새 줄'}
     </Text>
     <Text color={Colors.Foreground}>
-      <Text bold color={Colors.AccentPurple}>
-        Up/Down
-      </Text>{' '}
-      - Cycle through your prompt history
+      <Text bold color={Colors.AccentPurple}>Up/Down</Text> - 입력 기록 탐색
     </Text>
     <Text color={Colors.Foreground}>
-      <Text bold color={Colors.AccentPurple}>
-        Alt+Left/Right
-      </Text>{' '}
-      - Jump through words in the input
+      <Text bold color={Colors.AccentPurple}>Alt+Left/Right</Text> - 입력 단어 단위 이동
     </Text>
     <Text color={Colors.Foreground}>
-      <Text bold color={Colors.AccentPurple}>
-        Shift+Tab
-      </Text>{' '}
-      - Toggle auto-accepting edits
+      <Text bold color={Colors.AccentPurple}>Shift+Tab</Text> - 수정 자동 수락 토글
     </Text>
     <Text color={Colors.Foreground}>
-      <Text bold color={Colors.AccentPurple}>
-        Esc
-      </Text>{' '}
-      - Cancel operation
+      <Text bold color={Colors.AccentPurple}>Esc</Text> - 작업 취소
     </Text>
     <Text color={Colors.Foreground}>
-      <Text bold color={Colors.AccentPurple}>
-        Ctrl+C
-      </Text>{' '}
-      - Quit application
+      <Text bold color={Colors.AccentPurple}>Ctrl+C</Text> - 프로그램 종료
     </Text>
   </Box>
 );
