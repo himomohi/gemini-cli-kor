@@ -155,7 +155,7 @@ export const useSlashCommandProcessor = (
       if (!args || args.trim() === '') {
         addMessage({
           type: MessageType.ERROR,
-          content: 'Usage: /memory add <text to remember>',
+          content: '사용법: /memory add <기억할 내용>',
           timestamp: new Date(),
         });
         return;
@@ -163,7 +163,7 @@ export const useSlashCommandProcessor = (
       // UI feedback for attempting to schedule
       addMessage({
         type: MessageType.INFO,
-        content: `Attempting to save to memory: "${args.trim()}"`,
+        content: `메모리에 저장 시도 중: "${args.trim()}"`,
         timestamp: new Date(),
       });
       // Return info for scheduling the tool call
@@ -198,7 +198,7 @@ export const useSlashCommandProcessor = (
       {
         name: 'help',
         altName: '?',
-        description: 'for help on gemini-cli',
+        description: 'gemini-cli 도움말',
         action: (_mainCommand, _subCommand, _args) => {
           onDebugMessage('Opening help.');
           setShowHelp(true);
@@ -206,19 +206,19 @@ export const useSlashCommandProcessor = (
       },
       {
         name: 'docs',
-        description: 'open full Gemini CLI documentation in your browser',
+        description: '브라우저에서 Gemini CLI 전체 문서 열기',
         action: async (_mainCommand, _subCommand, _args) => {
           const docsUrl = 'https://goo.gle/gemini-cli-docs';
           if (process.env.SANDBOX && process.env.SANDBOX !== 'sandbox-exec') {
             addMessage({
               type: MessageType.INFO,
-              content: `Please open the following URL in your browser to view the documentation:\n${docsUrl}`,
+              content: `다음 URL을 브라우저에서 열어 문서를 확인하세요:\n${docsUrl}`,
               timestamp: new Date(),
             });
           } else {
             addMessage({
               type: MessageType.INFO,
-              content: `Opening documentation in your browser: ${docsUrl}`,
+              content: `브라우저에서 문서를 엽니다: ${docsUrl}`,
               timestamp: new Date(),
             });
             await open(docsUrl);
@@ -227,7 +227,7 @@ export const useSlashCommandProcessor = (
       },
       {
         name: 'clear',
-        description: 'clear the screen and conversation history',
+        description: '화면과 대화 기록을 지웁니다',
         action: async (_mainCommand, _subCommand, _args) => {
           onDebugMessage('Clearing terminal and resetting chat.');
           clearItems();
@@ -238,28 +238,28 @@ export const useSlashCommandProcessor = (
       },
       {
         name: 'theme',
-        description: 'change the theme',
+        description: '테마 변경',
         action: (_mainCommand, _subCommand, _args) => {
           openThemeDialog();
         },
       },
       {
         name: 'auth',
-        description: 'change the auth method',
+        description: '인증 방식 변경',
         action: (_mainCommand, _subCommand, _args) => {
           openAuthDialog();
         },
       },
       {
         name: 'editor',
-        description: 'set external editor preference',
+        description: '외부 편집기 설정',
         action: (_mainCommand, _subCommand, _args) => {
           openEditorDialog();
         },
       },
       {
         name: 'privacy',
-        description: 'display the privacy notice',
+        description: '개인정보 공지 표시',
         action: (_mainCommand, _subCommand, _args) => {
           openPrivacyNotice();
         },
@@ -267,7 +267,7 @@ export const useSlashCommandProcessor = (
       {
         name: 'stats',
         altName: 'usage',
-        description: 'check session stats. Usage: /stats [model|tools]',
+        description: '세션 통계 확인. 사용법: /stats [model|tools]',
         action: (_mainCommand, subCommand, _args) => {
           if (subCommand === 'model') {
             addMessage({
@@ -296,7 +296,7 @@ export const useSlashCommandProcessor = (
       },
       {
         name: 'mcp',
-        description: 'list configured MCP servers and tools',
+        description: '설정된 MCP 서버와 도구 목록',
         action: async (_mainCommand, _subCommand, _args) => {
           // Check if the _subCommand includes a specific flag to control description visibility
           let useShowDescriptions = showToolDescriptions;
@@ -322,7 +322,7 @@ export const useSlashCommandProcessor = (
           if (!toolRegistry) {
             addMessage({
               type: MessageType.ERROR,
-              content: 'Could not retrieve tool registry.',
+              content: '도구 레지스트리를 가져올 수 없습니다.',
               timestamp: new Date(),
             });
             return;
@@ -336,13 +336,13 @@ export const useSlashCommandProcessor = (
             if (process.env.SANDBOX && process.env.SANDBOX !== 'sandbox-exec') {
               addMessage({
                 type: MessageType.INFO,
-                content: `No MCP servers configured. Please open the following URL in your browser to view documentation:\n${docsUrl}`,
+              content: `구성된 MCP 서버가 없습니다. 다음 URL을 브라우저에서 열어 문서를 확인하세요:\n${docsUrl}`,
                 timestamp: new Date(),
               });
             } else {
               addMessage({
                 type: MessageType.INFO,
-                content: `No MCP servers configured. Opening documentation in your browser: ${docsUrl}`,
+              content: `구성된 MCP 서버가 없습니다. 브라우저에서 문서를 엽니다: ${docsUrl}`,
                 timestamp: new Date(),
               });
               await open(docsUrl);
@@ -478,7 +478,7 @@ export const useSlashCommandProcessor = (
                 }
               });
             } else {
-              message += '  No tools available\n';
+              message += '  사용 가능한 도구가 없습니다\n';
             }
             message += '\n';
           }
@@ -496,7 +496,7 @@ export const useSlashCommandProcessor = (
       {
         name: 'memory',
         description:
-          'manage memory. Usage: /memory <show|refresh|add> [text for add]',
+          '메모리 관리. 사용법: /memory <show|refresh|add> [추가할 내용]',
         action: (mainCommand, subCommand, args) => {
           switch (subCommand) {
             case 'show':
@@ -510,15 +510,15 @@ export const useSlashCommandProcessor = (
             case undefined:
               addMessage({
                 type: MessageType.ERROR,
-                content:
-                  'Missing command\nUsage: /memory <show|refresh|add> [text for add]',
+              content:
+                  '명령이 없습니다\n사용법: /memory <show|refresh|add> [추가할 내용]',
                 timestamp: new Date(),
               });
               return;
             default:
               addMessage({
                 type: MessageType.ERROR,
-                content: `Unknown /memory command: ${subCommand}. Available: show, refresh, add`,
+                content: `알 수 없는 /memory 하위 명령: ${subCommand}. 사용 가능: show, refresh, add`,
                 timestamp: new Date(),
               });
               return;
@@ -527,7 +527,7 @@ export const useSlashCommandProcessor = (
       },
       {
         name: 'tools',
-        description: 'list available Gemini CLI tools',
+        description: '사용 가능한 Gemini CLI 도구 목록',
         action: async (_mainCommand, _subCommand, _args) => {
           // Check if the _subCommand includes a specific flag to control description visibility
           let useShowDescriptions = showToolDescriptions;
@@ -549,7 +549,7 @@ export const useSlashCommandProcessor = (
           if (!tools) {
             addMessage({
               type: MessageType.ERROR,
-              content: 'Could not retrieve tools.',
+              content: '도구를 가져올 수 없습니다.',
               timestamp: new Date(),
             });
             return;
@@ -558,7 +558,7 @@ export const useSlashCommandProcessor = (
           // Filter out MCP tools by checking if they have a serverName property
           const geminiTools = tools.filter((tool) => !('serverName' in tool));
 
-          let message = 'Available Gemini CLI tools:\n\n';
+          let message = '사용 가능한 Gemini CLI 도구:\n\n';
 
           if (geminiTools.length > 0) {
             geminiTools.forEach((tool) => {
@@ -585,7 +585,7 @@ export const useSlashCommandProcessor = (
               }
             });
           } else {
-            message += '  No tools available\n';
+            message += '  사용 가능한 도구가 없습니다\n';
           }
           message += '\n';
 
@@ -607,7 +607,7 @@ export const useSlashCommandProcessor = (
       },
       {
         name: 'about',
-        description: 'show version info',
+        description: '버전 정보 표시',
         action: async (_mainCommand, _subCommand, _args) => {
           const osVersion = process.platform;
           let sandboxEnv = 'no sandbox';
@@ -636,7 +636,7 @@ export const useSlashCommandProcessor = (
       },
       {
         name: 'bug',
-        description: 'submit a bug report',
+        description: '버그 신고 제출',
         action: async (_mainCommand, _subCommand, args) => {
           let bugDescription = _subCommand || '';
           if (args) {
@@ -699,7 +699,7 @@ export const useSlashCommandProcessor = (
       {
         name: 'chat',
         description:
-          'Manage conversation history. Usage: /chat <list|save|resume> <tag>',
+          '대화 기록 관리. 사용법: /chat <list|save|resume> <태그>',
         action: async (_mainCommand, subCommand, args) => {
           const tag = (args || '').trim();
           const logger = new Logger(config?.getSessionId() || '');
@@ -708,7 +708,7 @@ export const useSlashCommandProcessor = (
           if (!chat) {
             addMessage({
               type: MessageType.ERROR,
-              content: 'No chat client available for conversation status.',
+              content: '대화 상태를 확인할 채팅 클라이언트가 없습니다.',
               timestamp: new Date(),
             });
             return;
@@ -716,7 +716,7 @@ export const useSlashCommandProcessor = (
           if (!subCommand) {
             addMessage({
               type: MessageType.ERROR,
-              content: 'Missing command\nUsage: /chat <list|save|resume> <tag>',
+              content: '명령이 없습니다\n사용법: /chat <list|save|resume> <태그>',
               timestamp: new Date(),
             });
             return;
@@ -726,7 +726,7 @@ export const useSlashCommandProcessor = (
               if (!tag) {
                 addMessage({
                   type: MessageType.ERROR,
-                  content: 'Missing tag. Usage: /chat save <tag>',
+                  content: '태그가 없습니다. 사용법: /chat save <태그>',
                   timestamp: new Date(),
                 });
                 return;
@@ -742,7 +742,7 @@ export const useSlashCommandProcessor = (
               } else {
                 addMessage({
                   type: MessageType.INFO,
-                  content: 'No conversation found to save.',
+                  content: '저장할 대화가 없습니다.',
                   timestamp: new Date(),
                 });
               }
@@ -754,7 +754,7 @@ export const useSlashCommandProcessor = (
               if (!tag) {
                 addMessage({
                   type: MessageType.ERROR,
-                  content: 'Missing tag. Usage: /chat resume <tag>',
+                  content: '태그가 없습니다. 사용법: /chat resume <태그>',
                   timestamp: new Date(),
                 });
                 return;
@@ -763,7 +763,7 @@ export const useSlashCommandProcessor = (
               if (conversation.length === 0) {
                 addMessage({
                   type: MessageType.INFO,
-                  content: `No saved checkpoint found with tag: ${tag}.`,
+                  content: `'${tag}' 태그에 대한 저장된 체크포인트가 없습니다.`,
                   timestamp: new Date(),
                 });
                 return;
@@ -815,15 +815,14 @@ export const useSlashCommandProcessor = (
               addMessage({
                 type: MessageType.INFO,
                 content:
-                  'list of saved conversations: ' +
-                  (await savedChatTags()).join(', '),
+                  '저장된 대화 목록: ' + (await savedChatTags()).join(', '),
                 timestamp: new Date(),
               });
               return;
             default:
               addMessage({
                 type: MessageType.ERROR,
-                content: `Unknown /chat command: ${subCommand}. Available: list, save, resume`,
+                content: `알 수 없는 /chat 명령: ${subCommand}. 사용 가능: list, save, resume`,
                 timestamp: new Date(),
               });
               return;
@@ -835,7 +834,7 @@ export const useSlashCommandProcessor = (
       {
         name: 'quit',
         altName: 'exit',
-        description: 'exit the cli',
+        description: 'CLI 종료',
         action: async (mainCommand, _subCommand, _args) => {
           const now = new Date();
           const { sessionStartTime } = session.stats;
@@ -862,13 +861,13 @@ export const useSlashCommandProcessor = (
       {
         name: 'compress',
         altName: 'summarize',
-        description: 'Compresses the context by replacing it with a summary.',
+        description: '요약으로 대체하여 컨텍스트를 압축합니다.',
         action: async (_mainCommand, _subCommand, _args) => {
           if (pendingCompressionItemRef.current !== null) {
             addMessage({
               type: MessageType.ERROR,
               content:
-                'Already compressing, wait for previous request to complete',
+                '이미 압축 중입니다. 이전 요청이 완료될 때까지 기다려주세요',
               timestamp: new Date(),
             });
             return;
@@ -898,14 +897,14 @@ export const useSlashCommandProcessor = (
             } else {
               addMessage({
                 type: MessageType.ERROR,
-                content: 'Failed to compress chat history.',
+                content: '대화 기록 압축에 실패했습니다.',
                 timestamp: new Date(),
               });
             }
           } catch (e) {
             addMessage({
               type: MessageType.ERROR,
-              content: `Failed to compress chat history: ${e instanceof Error ? e.message : String(e)}`,
+              content: `대화 기록 압축 실패: ${e instanceof Error ? e.message : String(e)}`,
               timestamp: new Date(),
             });
           }
@@ -918,7 +917,7 @@ export const useSlashCommandProcessor = (
       commands.push({
         name: 'restore',
         description:
-          'restore a tool call. This will reset the conversation and file history to the state it was in when the tool call was suggested',
+          '도구 호출 복구. 도구 호출이 제안되었을 때의 대화와 파일 기록으로 되돌립니다',
         completion: async () => {
           const checkpointDir = config?.getProjectTempDir()
             ? path.join(config.getProjectTempDir(), 'checkpoints')
@@ -943,7 +942,7 @@ export const useSlashCommandProcessor = (
           if (!checkpointDir) {
             addMessage({
               type: MessageType.ERROR,
-              content: 'Could not determine the .gemini directory path.',
+              content: '.gemini 디렉터리 경로를 확인할 수 없습니다.',
               timestamp: new Date(),
             });
             return;
@@ -959,7 +958,7 @@ export const useSlashCommandProcessor = (
               if (jsonFiles.length === 0) {
                 addMessage({
                   type: MessageType.INFO,
-                  content: 'No restorable tool calls found.',
+                  content: '복구 가능한 도구 호출이 없습니다.',
                   timestamp: new Date(),
                 });
                 return;
@@ -975,7 +974,7 @@ export const useSlashCommandProcessor = (
               const fileList = truncatedFiles.join('\n');
               addMessage({
                 type: MessageType.INFO,
-                content: `Available tool calls to restore:\n\n${fileList}`,
+                content: `복구 가능한 도구 호출:\n\n${fileList}`,
                 timestamp: new Date(),
               });
               return;
@@ -988,7 +987,7 @@ export const useSlashCommandProcessor = (
             if (!jsonFiles.includes(selectedFile)) {
               addMessage({
                 type: MessageType.ERROR,
-                content: `File not found: ${selectedFile}`,
+                content: `파일을 찾을 수 없습니다: ${selectedFile}`,
                 timestamp: new Date(),
               });
               return;
@@ -1014,7 +1013,7 @@ export const useSlashCommandProcessor = (
               );
               addMessage({
                 type: MessageType.INFO,
-                content: `Restored project to the state before the tool call.`,
+                content: `프로젝트를 도구 호출 이전 상태로 복원했습니다.`,
                 timestamp: new Date(),
               });
             }
@@ -1027,7 +1026,7 @@ export const useSlashCommandProcessor = (
           } catch (error) {
             addMessage({
               type: MessageType.ERROR,
-              content: `Could not read restorable tool calls. This is the error: ${error}`,
+              content: `복구 가능한 도구 호출을 읽을 수 없습니다. 오류: ${error}`,
               timestamp: new Date(),
             });
           }
@@ -1115,7 +1114,7 @@ export const useSlashCommandProcessor = (
 
       addMessage({
         type: MessageType.ERROR,
-        content: `Unknown command: ${trimmed}`,
+        content: `알 수 없는 명령: ${trimmed}`,
         timestamp: new Date(),
       });
       return true; // Indicate command was processed (even if unknown)

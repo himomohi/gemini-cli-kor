@@ -17,20 +17,20 @@ export const Tips: React.FC<TipsProps> = ({ config }) => {
   const geminiMdFileCount = config.getGeminiMdFileCount();
   return (
     <Box flexDirection="column" marginBottom={1}>
-      <Text color={Colors.Foreground}>Tips for getting started:</Text>
+      <Text color={Colors.Foreground}>시작을 위한 팁:</Text>
       <Text color={Colors.Foreground}>
-        1. Ask questions, edit files, or run commands.
+        1. 질문을 하거나 파일을 수정하거나 명령을 실행하세요.
       </Text>
       <Text color={Colors.Foreground}>
-        2. Be specific for the best results.
+        2. 구체적으로 요청할수록 더 좋은 결과를 얻을 수 있습니다.
       </Text>
       {geminiMdFileCount === 0 && (
         <Text color={Colors.Foreground}>
-          3. Create{' '}
+          3. {' '}
           <Text bold color={Colors.AccentPurple}>
             GEMINI.md
           </Text>{' '}
-          files to customize your interactions with Gemini.
+          파일을 만들어 Gemini와의 상호작용을 맞춤 설정하세요.
         </Text>
       )}
       <Text color={Colors.Foreground}>
@@ -38,7 +38,7 @@ export const Tips: React.FC<TipsProps> = ({ config }) => {
         <Text bold color={Colors.AccentPurple}>
           /help
         </Text>{' '}
-        for more information.
+        로 더 많은 정보를 확인하세요.
       </Text>
     </Box>
   );

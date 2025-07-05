@@ -231,7 +231,7 @@ describe('useSlashCommandProcessor', () => {
         2, // After user message
         expect.objectContaining({
           type: MessageType.ERROR,
-          text: 'Usage: /memory add <text to remember>',
+          text: '사용법: /memory add <기억할 내용>',
         }),
         expect.any(Number),
       );
@@ -285,7 +285,7 @@ describe('useSlashCommandProcessor', () => {
         2,
         expect.objectContaining({
           type: MessageType.ERROR,
-          text: 'Unknown /memory command: foobar. Available: show, refresh, add',
+          text: '알 수 없는 /memory 하위 명령: foobar. 사용 가능: show, refresh, add',
         }),
         expect.any(Number),
       );
@@ -650,7 +650,7 @@ describe('useSlashCommandProcessor', () => {
         2,
         expect.objectContaining({
           type: MessageType.ERROR,
-          text: 'Unknown command: /unknowncommand',
+          text: '알 수 없는 명령: /unknowncommand',
         }),
         expect.any(Number),
       );
@@ -674,7 +674,7 @@ describe('useSlashCommandProcessor', () => {
         2,
         expect.objectContaining({
           type: MessageType.ERROR,
-          text: 'Could not retrieve tools.',
+          text: '도구를 가져올 수 없습니다.',
         }),
         expect.any(Number),
       );
@@ -698,7 +698,7 @@ describe('useSlashCommandProcessor', () => {
         2,
         expect.objectContaining({
           type: MessageType.ERROR,
-          text: 'Could not retrieve tools.',
+          text: '도구를 가져올 수 없습니다.',
         }),
         expect.any(Number),
       );
@@ -755,7 +755,7 @@ describe('useSlashCommandProcessor', () => {
       });
 
       const message = mockAddItem.mock.calls[1][0].text;
-      expect(message).toContain('No tools available');
+      expect(message).toContain('사용 가능한 도구가 없습니다');
       expect(commandResult).toBe(true);
     });
 
@@ -833,7 +833,7 @@ describe('useSlashCommandProcessor', () => {
         2,
         expect.objectContaining({
           type: MessageType.ERROR,
-          text: 'Could not retrieve tool registry.',
+          text: '도구 레지스트리를 가져올 수 없습니다.',
         }),
         expect.any(Number),
       );
@@ -860,7 +860,7 @@ describe('useSlashCommandProcessor', () => {
         2,
         expect.objectContaining({
           type: MessageType.INFO,
-          text: `No MCP servers configured. Please open the following URL in your browser to view documentation:\nhttps://goo.gle/gemini-cli-docs-mcp`,
+          text: `구성된 MCP 서버가 없습니다. 다음 URL을 브라우저에서 열어 문서를 확인하세요:\nhttps://goo.gle/gemini-cli-docs-mcp`,
         }),
         expect.any(Number),
       );
@@ -887,7 +887,7 @@ describe('useSlashCommandProcessor', () => {
         2,
         expect.objectContaining({
           type: MessageType.INFO,
-          text: 'No MCP servers configured. Opening documentation in your browser: https://goo.gle/gemini-cli-docs-mcp',
+          text: '구성된 MCP 서버가 없습니다. 브라우저에서 문서를 엽니다: https://goo.gle/gemini-cli-docs-mcp',
         }),
         expect.any(Number),
       );
@@ -1111,7 +1111,7 @@ describe('useSlashCommandProcessor', () => {
       expect(message).toContain(
         '🔴 \u001b[1mserver2\u001b[0m - Disconnected (0 tools cached)',
       );
-      expect(message).toContain('No tools available');
+      expect(message).toContain('사용 가능한 도구가 없습니다');
 
       expect(commandResult).toBe(true);
     });
